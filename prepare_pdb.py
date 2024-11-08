@@ -28,7 +28,7 @@ ff = "G43b1" # in vacuo force field
 
 ## parse the parameters
 if len(sys.argv) < 2:
-  print "Usage: process_gromacs_input.py PDB [-k]"
+  print("Usage: process_gromacs_input.py PDB [-k]")
   sys.exit(1)
 pdbName = sys.argv[1]
 stripHET = False
@@ -41,7 +41,7 @@ pdbStem = pdbName.split(".pdb")
 if len(pdbStem) == 1:
   pdbStem = pdbName.split(".ent")
   if len(pdbStem) == 1:
-    print "The file should have extension .pdb"
+    print("The file should have extension .pdb")
     sys.exit(1)
 pdbStem = pdbStem[0]
 pdb = open(pdbName, "r")
@@ -51,7 +51,7 @@ for line in pdb:
   if line[:6] != "HETATM" and stripHET: 
     strippedPdb.write(line)
   elif line[:6] == "HETATM" and not stripHET:
-    print "HETATM record found in the PDB file...\nPlease consider using the -k option or manually remove the HETATM records\n"
+    print("HETATM record found in the PDB file...\nPlease consider using the -k option or manually remove the HETATM records\n")
     pdb.close()
     sys.exit(2)
   
@@ -101,7 +101,7 @@ for line in data:
 ## merge the two files into a new one
 numOfAtoms = len(grodata)
 if numOfAtoms != len(topdata):
-  print "GROFILE and TOPFILE contain a different number of atoms"
+  print("GROFILE and TOPFILE contain a different number of atoms")
   sys.exit(1)
 outfileName = pdbStem + ".easymifs"
 outfile = open(outfileName, "w")
